@@ -1,46 +1,48 @@
 import React from 'react';
-import { Dimensions, StyleSheet, View, Platform } from 'react-native';
+import { SafeAreaView, TextInput, Text,  StyleSheet, View, Button} from 'react-native';
 
 export default function App() {
-  console.log(['App launched', Dimensions.get("screen"), Platform.OS]);
   return (
-    <View style={{
-      backgroundColor: "#fff",
-      flex: 1,
-      flexDirection: "row", //horizontal
-      justifyContent: "center", // Alignment along the main axis
-      alignItems: "center", // Alignment across the secondary axis
-      alignContent: "center",
-      flexWrap: "wrap"
-    }}>
-      <View style={{
-        backgroundColor: "dodgerblue",
-        width: 100,
-        height: 100,
+    <SafeAreaView style={page.container}>
+      <View>
+        <Text style={page.heading}>B E T R A</Text>
+      </View>
 
-      }}></View>
-      <View style={{
-        backgroundColor: "gold",
-        width: 100,
-        height: 100,
-      }}></View>
-      <View style={{
-        backgroundColor: "tomato",
-        width: 100,
-        height: 100,
-      }}></View>
-      <View style={{
-        backgroundColor: "blue",
-        width: 100,
-        height: 100,
-      }}></View>
-      <View style={{
-        backgroundColor: "green",
-        width: 100,
-        height: 100,
-      }}></View>
+      <View style={page.signUpSection}>
+        <TextInput style={page.text} placeholder="Name" placeholderTextColor="#000"></TextInput>
+        <TextInput style={page.text} placeholder="E-mail"  placeholderTextColor="#000"></TextInput>
+        <TextInput style={page.text} secureTextEntry={true} autoCompleteType="password" placeholder="Password"  placeholderTextColor="#000"></TextInput>
+        <TextInput style={page.text} secureTextEntry={true} autoCompleteType="password" placeholder="Repeat Password"  placeholderTextColor="#000"></TextInput>
+      </View>
 
+      <View>
+        <Button title="Continue"/>
+        <Button title="Create Account"/>
+      </View>
 
-    </View>
+    </SafeAreaView>
   );
 }
+
+
+
+
+const page = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+  },
+  heading: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    lineHeight: 200,
+    padding:20,
+  },
+  signUpSection: {
+    padding: 50,
+    },
+  text: {
+    padding: 5,
+  }
+});
