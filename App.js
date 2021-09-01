@@ -1,48 +1,25 @@
 import React from 'react';
-import { SafeAreaView, TextInput, Text,  StyleSheet, View, Button} from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator} from '@react-navigation/native-stack';
+
+import CardScanningScreen from "./app/CardScanningScreen";
+import HomeScreen from './app/HomeScreen';
+import LoginScreen from './app/LoginScreen';
+import SignUpScreen from './app/SignUpScreen';
+import ItemScanningScreen from './app/ItemScanningScreen';
+import OrderPaidScreen from './app/OrderPaidScreen';
+import SplashScreen from './app/SplashScreen';
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <SafeAreaView style={page.container}>
-      <View>
-        <Text style={page.heading}>B E T R A</Text>
-      </View>
-
-      <View style={page.signUpSection}>
-        <TextInput style={page.text} placeholder="Name" placeholderTextColor="#000"></TextInput>
-        <TextInput style={page.text} placeholder="E-mail"  placeholderTextColor="#000"></TextInput>
-        <TextInput style={page.text} secureTextEntry={true} autoCompleteType="password" placeholder="Password"  placeholderTextColor="#000"></TextInput>
-        <TextInput style={page.text} secureTextEntry={true} autoCompleteType="password" placeholder="Repeat Password"  placeholderTextColor="#000"></TextInput>
-      </View>
-
-      <View>
-        <Button title="Continue"/>
-        <Button title="Create Account"/>
-      </View>
-
-    </SafeAreaView>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen name="Home" component={HomeScreen}/>
+        <Stack.Screen name="ItemScanningScreen" component={ItemScanningScreen}/>
+        <Stack.Screen name="OrderPaidScreen" component={OrderPaidScreen}/>
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-
-
-
-const page = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-  },
-  heading: {
-    fontSize: 28,
-    fontWeight: 'bold',
-    lineHeight: 200,
-    padding:20,
-  },
-  signUpSection: {
-    padding: 50,
-    },
-  text: {
-    padding: 5,
-  }
-});
