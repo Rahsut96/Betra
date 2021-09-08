@@ -1,14 +1,16 @@
 import React from 'react';
-import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, View, Image } from 'react-native';
 
-export default function OrderPaidScreen({ navigation }) {
+export default function OrderPaidScreen(props) {
     return (
         <SafeAreaView style={page.container}>
             <Text style={page.text}>
                 Thanks for shopping at Betra, 
                 see you soon!
             </Text>
-            <View style={page.qrCodeView}></View>
+            <View style={page.qrCodeView}>
+                <Image source={{ uri: "./assets/Betra.png"}}/>
+            </View>
         </SafeAreaView>
     );
 }

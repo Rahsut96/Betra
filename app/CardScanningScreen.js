@@ -1,7 +1,10 @@
 import React from 'react';
 import { SafeAreaView, View, Text, StyleSheet, TextInput, Button} from 'react-native';
+import { BarCodeScanner } from 'expo-barcode-scanner';
+
 
 export default function CardScanningScreen(props) {
+
     return (
         <SafeAreaView style={page.container}>
             <Text style={page.heading}>B E T R A</Text>

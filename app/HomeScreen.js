@@ -1,5 +1,5 @@
 import React from 'react';
-import { SafeAreaView, StyleSheet, Text, View, Button } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, View, Button, Image } from 'react-native';
 
 
 
@@ -9,9 +9,9 @@ export default function HomeScreen({ navigation }) {
             <View style={page.headerView}>
                 <Text>Welcome, "Name"</Text>
             </View>
-
-            <View style={page.qrCodeView}></View>
-
+            <View style={page.qrCodeView}>
+                <Image source={{ uri: "./assets/Betra.png"}}/>
+            </View>
             <Button title="Item Scanner"
             onPress={() => navigation.navigate('ItemScanningScreen')}/>
             <Button title="Menu"/>
@@ -30,9 +30,7 @@ const page = StyleSheet.create({
     qrCodeView: {
         height: 250,
         width: 250,
-        backgroundColor: "dodgerblue", 
-        margin: 75,
-        marginTop: 100,
+        
     },
     headerView: {
         flexDirection: "row",
