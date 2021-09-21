@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="0b977f94-ad72-4d4e-96ad-ce5d38397e1a" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/app.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/CardScanningScreen.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/HomeScreen.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/ItemScanningScreen.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/LoginScreen.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/OrderPaidScreen.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/ProfileScreen.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/SignUpScreen.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/SplashScreen.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1yPmZNzH5j6PHatZ4mX7e3aw1Q3" />
+  <component name="ProjectViewState">
+    <option name="flattenPackages" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+    <option name="sortByType" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0b977f94-ad72-4d4e-96ad-ce5d38397e1a" name="Default Changelist" comment="" />
+      <created>1632161651883</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1632161651883</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="626" y="279" key="#Notifications" timestamp="1632161803092">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="626" y="279" key="#Notifications/0.0.1536.864@0.0.1536.864" timestamp="1632161803092" />
+    <state x="140" y="140" width="1200" height="552" key="AVDManager" timestamp="1632162085681">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="140" y="140" width="1200" height="552" key="AVDManager/0.0.1536.864@0.0.1536.864" timestamp="1632162085681" />
+    <state x="321" y="159" key="IDE.errors.dialog" timestamp="1632161864753">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="321" y="159" key="IDE.errors.dialog/0.0.1536.864@0.0.1536.864" timestamp="1632161864753" />
+  </component>
+</project>
