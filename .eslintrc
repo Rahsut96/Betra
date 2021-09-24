@@ -4,6 +4,9 @@
         "node": true,
         "es2021": true
     },
+    "settings": {
+        "import/extensions": [".js", ".jsx"]
+    },
     "extends": ["plugin:react/recommended", "airbnb", "prettier"],
     "parserOptions": {
         "ecmaFeatures": {
@@ -14,6 +17,7 @@
     },
     "plugins": ["react"],
     "rules": {
+        "react/prop-types": 0,
         "react/jsx-props-no-spreading": [
             2,
             {

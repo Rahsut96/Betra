@@ -1,5 +1,15 @@
 import React from "react";
-import { SafeAreaView, StyleSheet, Text, View, Image } from "react-native";
+import {
+    SafeAreaView,
+    StyleSheet,
+    Text,
+    View,
+    Image,
+    TouchableOpacity,
+} from "react-native";
+import PropType from "prop-types";
+
+import image from "../../assets/Betra.png";
 
 const page = StyleSheet.create({
     container: {
@@ -13,21 +23,30 @@ const page = StyleSheet.create({
         fontSize: 17,
     },
     qrCodeView: {
-        height: 250,
-        width: 250,
-        backgroundColor: "dodgerblue",
+        padding: 10,
     },
 });
 // eslint-disable-next-line no-unused-vars
-export default function OrderPaidScreen(props) {
+function OrderPaidScreen({ navigation }) {
     return (
         <SafeAreaView style={page.container}>
             <Text style={page.text}>
                 Thanks for shopping at Betra, see you soon!
             </Text>
             <View style={page.qrCodeView}>
-                <Image source={{ uri: "./assets/Betra.png" }} />
+                {/* TODO: QRCODE Scanner */}
+                <TouchableOpacity onPress={() => navigation?.navigate("Home")}>
+                    <Image source={image} width="100%" />
+                </TouchableOpacity>
             </View>
         </SafeAreaView>
     );
 }
+
+OrderPaidScreen.propTypes = {
+    navigation: PropType.shape({ navigate: PropType.func }),
+};
+OrderPaidScreen.defaultProps = {
+    navigation: null,
+};
+export default OrderPaidScreen;

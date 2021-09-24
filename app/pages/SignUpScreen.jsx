@@ -1,78 +1,121 @@
 import { Link } from "@react-navigation/native";
-import React from "react";
+import { StatusBar } from "expo-status-bar";
+import React, { useState } from "react";
 import {
-    SafeAreaView,
-    TextInput,
-    Text,
     StyleSheet,
+    Text,
     View,
-    Button,
+    SafeAreaView,
+    KeyboardAvoidingView,
+    Platform,
 } from "react-native";
+import InputField from "../components/InputField";
+import CustomButton from "../components/CustomButton";
+import { IOS_PLATFORM } from "../constants";
+
+import Firebase from "../firebaseConfig";
+
+const auth = Firebase.auth();
 
 const page = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#fff",
-        alignItems: "center",
+        width: "80%",
+        alignSelf: "center",
+        justifyContent: "center",
+        paddingHorizontal: 12,
     },
     heading: {
         fontSize: 28,
         fontWeight: "bold",
-        lineHeight: 200,
+        lineHeight: 150,
         padding: 20,
+        alignSelf: "center",
     },
-    signUpSection: {
-        padding: 50,
-    },
-    text: {
-        padding: 5,
-        fontSize: 16,
+    title: {
+        fontSize: 20,
+        fontWeight: "600",
+        color: "#000",
+        alignSelf: "center",
+        paddingBottom: 24,
     },
     link: {
         marginTop: 24,
         alignSelf: "center",
     },
 });
-export default function SignUpScreen() {
+
+const SignupScreen = () => {
+    const [formValues, setFormValues] = useState({ email: "", password: "" });
+    // const [passwordVisibility, setPasswordVisibility] = useState(true);
+    // const [rightIcon, setRightIcon] = useState('eye');
+    const [signupError, setSignupError] = useState("");
+
+    // const handlePasswordVisibility = () => {
+    //   if (rightIcon === 'eye') {
+    //     setRightIcon('eye-off');
+    //     setPasswordVisibility(!passwordVisibility);
+    //   } else if (rightIcon === 'eye-off') {
+    //     setRightIcon('eye');
+    //     setPasswordVisibility(!passwordVisibility);
+    //   }
+    // };
+
+    const onHandleSignup = async () => {
+        try {
+            if (formValues?.email !== "" && formValues?.password !== "") {
+                await auth.createUserWithEmailAndPassword(
+                    formValues.email,
+                    formValues.password
+                );
+            }
+        } catch (error) {
+            Error({ message: "Enter correct values" });
+            setSignupError(error.message);
+        }
+    };
+
     return (
         <SafeAreaView style={page.container}>
-            <View>
-                <Text style={page.heading}>B E T R A</Text>
-            </View>
-
-            <View style={page.signUpSection}>
-                <TextInput
-                    style={page.text}
-                    placeholder="Name"
-                    placeholderTextColor="#000"
-                />
-                <TextInput
-                    style={page.text}
+            <StatusBar />
+            <KeyboardAvoidingView
+                behavior={Platform.OS === IOS_PLATFORM ? "padding" : "height"}
+            >
+                <View>
+                    <Text style={page.heading}>B E T R A</Text>
+                </View>
+                <Text style={page.title}>Create new account</Text>
+                <InputField
                     placeholder="E-mail"
-                    placeholderTextColor="#000"
+                    autoCapitalize="none"
+                    keyboardType="email-address"
+                    textContentType="emailAddress"
+                    autoFocus
+                    value={formValues.email}
+                    onChangeText={(text) =>
+                        setFormValues((prev) => ({ ...prev, email: text }))
+                    }
                 />
-                <TextInput
-                    style={page.text}
-                    secureTextEntry
-                    autoCompleteType="password"
+                <InputField
                     placeholder="Password"
-                    placeholderTextColor="#000"
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                    textContentType="password"
+                    value={formValues.password}
+                    onChangeText={(text) =>
+                        setFormValues((prev) => ({ ...prev, password: text }))
+                    }
+                    // secureTextEntry={passwordVisibility}
+                    // handlePasswordVisibility={handlePasswordVisibility}
                 />
-                <TextInput
-                    style={page.text}
-                    secureTextEntry
-                    autoCompleteType="password"
-                    placeholder="Repeat Password"
-                    placeholderTextColor="#000"
-                />
-            </View>
-
-            <View>
-                <Button title="Continue" />
+                {signupError ? <Text visible>{signupError}</Text> : null}
+                <CustomButton onPress={onHandleSignup} title="Signup" />
                 <Link to="/Login" style={page.link}>
                     Login
                 </Link>
-            </View>
+            </KeyboardAvoidingView>
         </SafeAreaView>
     );
-}
+};
+
+export default SignupScreen;
