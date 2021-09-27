@@ -1,0 +1,39 @@
+{
+    "project_info": {
+        "project_number": "92252437570",
+        "project_id": "batra-76bfd",
+        "storage_bucket": "batra-76bfd.appspot.com"
+    },
+    "client": [
+        {
+            "client_info": {
+                "mobilesdk_app_id": "1:92252437570:android:6496a601e00b0c141b81db",
+                "android_client_info": {
+                    "package_name": "com.betra"
+                }
+            },
+            "oauth_client": [
+                {
+                    "client_id": "92252437570-31739cvlstdcfhvfl189eekocd3au7p6.apps.googleusercontent.com",
+                    "client_type": 3
+                }
+            ],
+            "api_key": [
+                {
+                    "current_key": "AIzaSyDey1vnXfpwSaMaJlxwBoB7wU3WJMCL2dU"
+                }
+            ],
+            "services": {
+                "appinvite_service": {
+                    "other_platform_oauth_client": [
+                        {
+                            "client_id": "92252437570-31739cvlstdcfhvfl189eekocd3au7p6.apps.googleusercontent.com",
+                            "client_type": 3
+                        }
+                    ]
+                }
+            }
+        }
+    ],
+    "configuration_version": "1"
+}
