@@ -1,0 +1,13 @@
+{
+    "type":"mysql",
+    "host":"localhost",
+    "port":3306,
+    "username":"betraadmin",
+    "password":"betraadmin@123",
+    "database":"betra_local",
+    "entities":["dist/**/*.entity{.ts,.js}"],
+    "synchronize":true,
+    "cli":{
+        "migrationsDir":"src/migration"
+    }
+}

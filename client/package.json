@@ -8,7 +8,8 @@
         "web": "expo start --web",
         "eject": "expo eject",
         "prepare": "husky install",
-        "lint": "eslint  \"**/*.{js,jsx}\" --ignore-pattern node_modules/"
+        "lint": "eslint  \"**/*.{js,jsx}\" --ignore-pattern node_modules/",
+        "format": "prettier --w ."
     },
     "dependencies": {
         "@react-native-async-storage/async-storage": "^1.15.8",
@@ -41,8 +42,7 @@
         "react-native-screens": "~3.4.0",
         "react-native-svg": "12.1.1",
         "react-native-uuid": "^2.0.1",
-        "react-native-web": "~0.13.12",
-        "sequelize": "^6.6.5"
+        "react-native-web": "~0.13.12"
     },
     "devDependencies": {
         "@babel/core": "~7.9.0",
