@@ -11,13 +11,14 @@ import { SuppliersService } from './suppliers.service';
 import { CreateSupplierDto } from './dto/create-supplier.dto';
 import { UpdateSupplierDto } from './dto/update-supplier.dto';
 
-@Controller('suppliers')
+@Controller('suppliers/v1')
 export class SuppliersController {
   constructor(private readonly suppliersService: SuppliersService) {}
 
   @Post()
   create(@Body() createSupplierDto: CreateSupplierDto) {
-    return this.suppliersService.create(createSupplierDto);
+    const supplier = this.suppliersService.create(createSupplierDto);
+    return { message: 'Supplier created successfully !', data: supplier };
   }
 
   @Get()

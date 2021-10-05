@@ -1,43 +1,48 @@
+import { IsNotEmpty } from 'class-validator';
 import { Users } from 'src/users/entities/users.entity';
 import {
-    Column,
-    CreateDateColumn,
-    DeleteDateColumn,
-    Entity,
-    JoinColumn,
-    OneToOne,
-    PrimaryGeneratedColumn,
-    Timestamp,
-    UpdateDateColumn,
-  } from 'typeorm';
-  
+  Column,
+  CreateDateColumn,
+  DeleteDateColumn,
+  Entity,
+  JoinColumn,
+  OneToOne,
+  PrimaryGeneratedColumn,
+  Timestamp,
+  UpdateDateColumn,
+} from 'typeorm';
+
 @Entity()
 export class AccessCode {
-    @PrimaryGeneratedColumn('uuid')
-    id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: number;
 
-    @Column('blob')
-    code:string;
+  @IsNotEmpty()
+  @Column('blob')
+  code: string;
 
-    @Column('time')
-    expiry:Timestamp
+  @IsNotEmpty()
+  @Column('time')
+  expiry: Timestamp;
 
-    @Column('int')
-    type: number
+  @IsNotEmpty()
+  @Column('int')
+  type: number;
 
-    @Column('time')
-    accessTime: Timestamp
+  @IsNotEmpty()
+  @Column('time')
+  accessTime: Timestamp;
 
-    @OneToOne(()=> Users)
-    @JoinColumn()
-    users: Users
-    
-    @CreateDateColumn()
-    createdAt: Date;
+  @OneToOne(() => Users, (users) => users.accessCode)
+  @JoinColumn()
+  user: Users;
 
-    @UpdateDateColumn()
-    updatedAt: Date;
+  @CreateDateColumn()
+  createdAt: Date;
 
-    @DeleteDateColumn()
-    deletedAt: Date;
+  @UpdateDateColumn()
+  updatedAt: Date;
+
+  @DeleteDateColumn()
+  deletedAt: Date;
 }

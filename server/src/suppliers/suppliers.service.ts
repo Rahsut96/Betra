@@ -13,8 +13,7 @@ export class SuppliersService {
   ) {}
 
   async create(createSupplierDto: CreateSupplierDto) {
-    const supplier = await this.suppliersRepository.save(createSupplierDto);
-    return { message: 'Supplier created successfully !', data: supplier };
+    return await this.suppliersRepository.save(createSupplierDto);
   }
 
   findAll() {

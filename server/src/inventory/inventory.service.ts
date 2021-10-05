@@ -12,9 +12,8 @@ export class InventoryService {
     private inventoryRepository: Repository<Inventory>,
   ) {}
 
-  async create(createInventoryDto: CreateInventoryDto) {
-    const inventory = await this.inventoryRepository.save(createInventoryDto);
-    return { message: 'Inventory created successfully !', data: inventory };
+  create(createInventoryDto: CreateInventoryDto) {
+    return this.inventoryRepository.save(createInventoryDto);
   }
 
   findAll() {

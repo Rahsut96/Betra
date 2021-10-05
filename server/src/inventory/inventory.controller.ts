@@ -11,13 +11,14 @@ import { InventoryService } from './inventory.service';
 import { CreateInventoryDto } from './dto/create-inventory.dto';
 import { UpdateInventoryDto } from './dto/update-inventory.dto';
 
-@Controller('inventory')
+@Controller('inventory/v1')
 export class InventoryController {
   constructor(private readonly inventoryService: InventoryService) {}
 
   @Post()
-  create(@Body() createInventoryDto: CreateInventoryDto) {
-    return this.inventoryService.create(createInventoryDto);
+  async create(@Body() createInventoryDto: CreateInventoryDto) {
+    const inventory = await this.inventoryService.create(createInventoryDto);
+    return { message: 'Inventory created successfully !', data: inventory };
   }
 
   @Get()

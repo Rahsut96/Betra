@@ -22,7 +22,7 @@ export class ProductsController {
 
   @Post()
   @UseInterceptors(FileInterceptor('barcode'))
-  create(
+  async create(
     @Body() createProductDto: CreateProductDto,
     @UploadedFile() file: Express.Multer.File,
   ) {
@@ -36,7 +36,11 @@ export class ProductsController {
     }
     const blobData = file.buffer.toString('base64');
     console.log('Handle barcode image data', blobData);
-    return this.productsService.create({ ...createProductDto, barcode: '' });
+    const product = await this.productsService.create({
+      ...createProductDto,
+      barcode: '',
+    });
+    return { message: 'Product created successfully !', data: product };
   }
 
   @Get()

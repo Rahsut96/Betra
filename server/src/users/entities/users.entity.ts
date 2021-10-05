@@ -5,14 +5,13 @@ import {
   UpdateDateColumn,
   CreateDateColumn,
   DeleteDateColumn,
-  OneToOne,
-  JoinColumn,
   OneToMany,
+  OneToOne,
 } from 'typeorm';
 import { Exclude } from 'class-transformer';
-import { IsEmail } from 'class-validator';
-import { AccessCode } from 'src/access-code/entities/accessCode.entity';
+import { IsDate, IsEmail, IsNotEmpty } from 'class-validator';
 import { PaymentInfo } from 'src/payment-info/entities/payment-info.entity';
+import { AccessCode } from 'src/access-code/entities/accessCode.entity';
 
 @Entity()
 export class Users {
@@ -20,36 +19,48 @@ export class Users {
   id: string;
 
   @Column({ length: 100 })
+  @IsNotEmpty()
   firstName: string;
 
   @Column({ length: 100 })
-  lastName: string;
+  lastName: string = null;
 
   @Column({ length: 100 })
+  @IsNotEmpty()
   @IsEmail()
   email: string;
 
   @Column()
+  @IsNotEmpty()
   @Exclude()
   password: string;
 
   @Column({ length: 10 })
+  @IsNotEmpty()
   phone: string;
 
-  @Column()
+  @Column({ default: null })
   billingAddress: string;
 
-  @Column()
+  @Column({ default: null })
   shippingAddress: string;
 
-  @Column()
+  @Column({ default: null })
   appVersion: string;
 
-  @Column()
+  @Column({ default: null })
+  @IsDate()
   lastLogin: Date;
 
-  @OneToMany(()=> PaymentInfo, (paymentInfo)=> paymentInfo.users)
-  paymentInfo:PaymentInfo
+  @OneToMany(() => PaymentInfo, (paymentInfo) => paymentInfo.user, {
+    eager: true,
+  })
+  paymentInfo: PaymentInfo[];
+
+  @OneToOne(() => AccessCode, (accessCode) => accessCode.user, {
+    eager: true,
+  })
+  accessCode: AccessCode;
 
   @CreateDateColumn()
   createdAt: Date;

@@ -12,9 +12,8 @@ export class UsersService {
     private usersRepository: Repository<Users>,
   ) {}
 
-  async create(createUserDto: CreateUserDto) {
-    const newuser = await this.usersRepository.save(createUserDto);
-    return { massage: 'User created successfully !', data: { ...newuser } };
+  create(createUserDto: CreateUserDto) {
+    return this.usersRepository.save(createUserDto);
   }
 
   findAll() {

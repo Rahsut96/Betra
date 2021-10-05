@@ -12,9 +12,8 @@ export class AccesscodeService {
     private accesscodeRepository: Repository<AccessCode>,
   ) {}
 
-  async create(createAccesscodeDto: CreateAccesscodeDto) {
-    const inventory = await this.accesscodeRepository.save(createAccesscodeDto);
-    return { message: 'AccessCode created successfully !', data: inventory };
+  create(createAccesscodeDto: CreateAccesscodeDto) {
+    return this.accesscodeRepository.save(createAccesscodeDto);
   }
 
   findAll() {

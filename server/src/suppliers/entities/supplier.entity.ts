@@ -8,6 +8,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { IsNotEmpty } from 'class-validator';
 
 @Entity()
 export class Supplier {
@@ -15,12 +16,15 @@ export class Supplier {
   id: string;
 
   @Column()
+  @IsNotEmpty()
   name: string;
 
   @Column()
+  @IsNotEmpty()
   contactName: string;
 
   @Column()
+  @IsNotEmpty()
   address: string;
 
   @Column()

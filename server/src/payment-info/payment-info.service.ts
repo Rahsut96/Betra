@@ -9,27 +9,26 @@ import { PaymentInfo } from './entities/payment-info.entity';
 export class PaymentInfoService {
   constructor(
     @InjectRepository(PaymentInfo)
-    private inventoryRepository: Repository<PaymentInfo>,
+    private paymentInfoRepository: Repository<PaymentInfo>,
   ) {}
 
-  async create(createPaymentInfoDto: CreatePaymentInfoDto) {
-    const inventory = await this.inventoryRepository.save(createPaymentInfoDto);
-    return { message: 'Inventory created successfully !', data: inventory };
+  create(createPaymentInfoDto: CreatePaymentInfoDto) {
+    return this.paymentInfoRepository.save(createPaymentInfoDto);
   }
 
   findAll() {
-    return this.inventoryRepository.find();
+    return this.paymentInfoRepository.find();
   }
 
   findOne(id: string) {
-    return this.inventoryRepository.findOne(id);
+    return this.paymentInfoRepository.findOne(id);
   }
 
   update(id: string, updatePaymentInfoDto: UpdatePaymentInfoDto) {
-    return this.inventoryRepository.update(id, updatePaymentInfoDto);
+    return this.paymentInfoRepository.update(id, updatePaymentInfoDto);
   }
 
   remove(id: string) {
-    return this.inventoryRepository.softDelete(id);
+    return this.paymentInfoRepository.softDelete(id);
   }
 }

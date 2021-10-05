@@ -1,4 +1,3 @@
-import { Supplier } from '../../suppliers/entities/supplier.entity';
 import {
   Column,
   CreateDateColumn,
@@ -8,7 +7,9 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { Supplier } from 'src/suppliers/entities/supplier.entity';
 import { Products } from 'src/products/entities/products.entity';
+import { IsNotEmpty } from 'class-validator';
 
 @Entity()
 export class Inventory {
@@ -16,15 +17,19 @@ export class Inventory {
   id: string;
 
   @Column('double')
+  @IsNotEmpty()
   cost: number;
 
   @Column()
+  @IsNotEmpty()
   stock: number;
 
-  @ManyToOne(() => Supplier, (supplier) => supplier.inventory)
+  @IsNotEmpty()
+  @ManyToOne(() => Supplier, (supplier) => supplier.inventory, { eager: true })
   supplier: Supplier;
 
-  @ManyToOne(() => Products, (products) => products.inventory)
+  @IsNotEmpty()
+  @ManyToOne(() => Products, (products) => products.inventory, { eager: true })
   products: Products;
 
   @CreateDateColumn()

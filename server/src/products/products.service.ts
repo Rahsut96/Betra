@@ -12,12 +12,8 @@ export class ProductsService {
     private productRepository: Repository<Products>,
   ) {}
 
-  async create(createProductDto: CreateProductDto) {
-    const newProduct = await this.productRepository.save(createProductDto);
-    return {
-      massage: 'Product created successfully !',
-      data: { ...newProduct },
-    };
+  create(createProductDto: CreateProductDto) {
+    return this.productRepository.save(createProductDto);
   }
 
   findAll() {
