@@ -7,4 +7,5 @@ export class CreateAccesscodeDto {
   type: number;
   accessTime: Timestamp;
   user: Users;
+  userId: string;
 }

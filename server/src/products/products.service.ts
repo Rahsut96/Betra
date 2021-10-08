@@ -24,6 +24,10 @@ export class ProductsService {
     return this.productRepository.findOne(id);
   }
 
+  findMany(query: any) {
+    return this.productRepository.find(query);
+  }
+
   update(id: string, updateProductDto: UpdateProductDto) {
     return this.productRepository.update(id, updateProductDto);
   }

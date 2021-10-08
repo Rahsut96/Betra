@@ -31,7 +31,7 @@ export class Supplier {
   notes: string;
 
   @OneToMany(() => Inventory, (inventory) => inventory.supplier)
-  inventory: Inventory;
+  inventory: Inventory[];
 
   @CreateDateColumn()
   createdAt: Date;

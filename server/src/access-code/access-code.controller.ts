@@ -7,12 +7,17 @@ import {
   Param,
   Delete,
 } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { UsersService } from 'src/users/users.service';
 import { AccesscodeService } from './access-code.service';
 import { CreateAccesscodeDto } from './dto/create-accessCode.dto';
 import { UpdateAccesscodeDto } from './dto/update-accessCode.dto';
 
-@Controller('accesscode/v1')
+@ApiTags('Access Code')
+@Controller({
+  version: '1',
+  path: 'accesscode',
+})
 export class AccesscodeController {
   constructor(
     private readonly accesscodeService: AccesscodeService,

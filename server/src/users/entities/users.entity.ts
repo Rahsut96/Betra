@@ -12,6 +12,7 @@ import { Exclude } from 'class-transformer';
 import { IsDate, IsEmail, IsNotEmpty } from 'class-validator';
 import { PaymentInfo } from 'src/payment-info/entities/payment-info.entity';
 import { AccessCode } from 'src/access-code/entities/accessCode.entity';
+import { Orders } from 'src/orders/entities/order.entity';
 
 @Entity()
 export class Users {
@@ -25,7 +26,7 @@ export class Users {
   @Column({ length: 100 })
   lastName: string = null;
 
-  @Column({ length: 100 })
+  @Column({ unique: true, length: 100 })
   @IsNotEmpty()
   @IsEmail()
   email: string;
@@ -51,6 +52,9 @@ export class Users {
   @Column({ default: null })
   @IsDate()
   lastLogin: Date;
+
+  @OneToMany(() => Orders, (orders) => orders.user)
+  orders: Orders[];
 
   @OneToMany(() => PaymentInfo, (paymentInfo) => paymentInfo.user, {
     eager: true,

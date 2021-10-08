@@ -34,7 +34,7 @@ export class AccessCode {
   accessTime: Timestamp;
 
   @OneToOne(() => Users, (users) => users.accessCode)
-  @JoinColumn()
+  @JoinColumn({ name: 'userId' })
   user: Users;
 
   @CreateDateColumn()

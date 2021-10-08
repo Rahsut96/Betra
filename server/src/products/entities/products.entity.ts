@@ -6,6 +6,7 @@ import {
   UpdateDateColumn,
   DeleteDateColumn,
   OneToMany,
+  Double,
 } from 'typeorm';
 import { IsDate, IsNotEmpty } from 'class-validator';
 import { Inventory } from 'src/inventory/entities/inventory.entity';
@@ -13,7 +14,7 @@ import { Inventory } from 'src/inventory/entities/inventory.entity';
 @Entity()
 export class Products {
   @PrimaryGeneratedColumn('uuid')
-  id: number;
+  id: string;
 
   @Column({ length: 100 })
   @IsNotEmpty()
@@ -31,9 +32,9 @@ export class Products {
 
   @Column('double')
   @IsNotEmpty()
-  price: number;
+  price: Double;
 
-  @OneToMany(() => Inventory, (inventory) => inventory.supplier)
+  @OneToMany(() => Inventory, (inventory) => inventory.product)
   inventory: Inventory;
 
   @CreateDateColumn()

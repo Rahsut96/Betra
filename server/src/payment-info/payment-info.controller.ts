@@ -11,8 +11,13 @@ import { PaymentInfoService } from './payment-info.service';
 import { CreatePaymentInfoDto } from './dto/create-payment-info.dto';
 import { UpdatePaymentInfoDto } from './dto/update-payment-info.dto';
 import { UsersService } from 'src/users/users.service';
+import { ApiTags } from '@nestjs/swagger';
 
-@Controller('paymentinfo/v1')
+@ApiTags('Payment Info')
+@Controller({
+  version: '1',
+  path: 'paymentinfo',
+})
 export class PaymentInfoController {
   constructor(
     private readonly paymentInfoService: PaymentInfoService,

@@ -24,6 +24,10 @@ export class InventoryService {
     return this.inventoryRepository.findOne(id);
   }
 
+  findWhere(query: any, option?: any) {
+    return this.inventoryRepository.find({ where: query, ...option });
+  }
+
   update(id: string, updateInventoryDto: UpdateInventoryDto) {
     return this.inventoryRepository.update(id, updateInventoryDto);
   }

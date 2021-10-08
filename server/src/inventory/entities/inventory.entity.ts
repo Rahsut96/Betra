@@ -16,21 +16,27 @@ export class Inventory {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column('double')
   @IsNotEmpty()
+  @Column('double', { default: null })
   cost: number;
 
-  @Column()
   @IsNotEmpty()
+  @Column({ default: null })
   stock: number;
 
   @IsNotEmpty()
-  @ManyToOne(() => Supplier, (supplier) => supplier.inventory, { eager: true })
-  supplier: Supplier;
+  @Column({ nullable: true })
+  supplierId: string;
 
   @IsNotEmpty()
-  @ManyToOne(() => Products, (products) => products.inventory, { eager: true })
-  products: Products;
+  @Column({ unique: true })
+  productId: string;
+
+  @ManyToOne(() => Supplier, (supplier) => supplier.inventory)
+  supplier: Supplier;
+
+  @ManyToOne(() => Products, (products) => products.inventory)
+  product: Products;
 
   @CreateDateColumn()
   createdAt: Date;
