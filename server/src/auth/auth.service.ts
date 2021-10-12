@@ -8,37 +8,40 @@ import { JwtPayload } from './interfaces/payload.interface';
 
 @Injectable()
 export class AuthService {
-    constructor(private usersService: UsersService, private readonly jwtService: JwtService,) {}
+  constructor(
+    private usersService: UsersService,
+    private readonly jwtService: JwtService,
+  ) {}
 
-    async validateUser(payload: JwtPayload): Promise<UserDto> {
-        const user = await this.usersService.findByPayload(payload);
-        if(!user) {
-            throw new HttpException('Invalid token', HttpStatus.UNAUTHORIZED);
-        }
-        return user;
+  async validateUser(payload: JwtPayload): Promise<UserDto> {
+    const user = await this.usersService.findByPayload(payload);
+    if (!user) {
+      throw new HttpException('Invalid token', HttpStatus.UNAUTHORIZED);
     }
+    return user;
+  }
 
-    async login(loginUserDto: LoginUserDto): Promise<LoginStatus> {
-        // find user in db
-        const user = await this.usersService.findByLogin(loginUserDto);
-    
-        // generate and sign token
-        const token = this._createToken(user);
-    
-        return {
-          email: user.email,
-          ...token,
-        };
-      }
-    
-      private _createToken({ email }: UserDto): any {
-        const expiresIn = process.env.EXPIRESIN;
-    
-        const user: JwtPayload = { email };
-        const accessToken = this.jwtService.sign(user);
-        return {
-          expiresIn,
-          accessToken,
-        };
-      }
+  async login(loginUserDto: LoginUserDto): Promise<LoginStatus> {
+    // find user in db
+    const user = await this.usersService.findByLogin(loginUserDto);
+
+    // generate and sign token
+    const token = this._createToken(user);
+
+    return {
+      email: user.email,
+      ...token,
+    };
+  }
+
+  private _createToken({ email }: UserDto): any {
+    const expiresIn = process.env.EXPIRESIN;
+
+    const user: JwtPayload = { email };
+    const accessToken = this.jwtService.sign(user);
+    return {
+      expiresIn,
+      accessToken,
+    };
+  }
 }

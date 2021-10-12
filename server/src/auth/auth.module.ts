@@ -8,19 +8,20 @@ import { JwtStrategy } from './jwt.strategy';
 
 @Module({
   imports: [
-    UsersModule, 
+    UsersModule,
     PassportModule.register({
-    defaultStrategy: 'jwt',
-    property: 'user',
-    session: false,
+      defaultStrategy: 'jwt',
+      property: 'user',
+      session: false,
     }),
     JwtModule.register({
-      secret: process.env.SECRETKEY, signOptions: {
+      secret: process.env.SECRETKEY,
+      signOptions: {
         expiresIn: process.env.EXPIRESIN,
       },
     }),
- ],
- controllers: [AuthController],
+  ],
+  controllers: [AuthController],
   providers: [AuthService, JwtStrategy],
   exports: [PassportModule, JwtModule],
 })

@@ -5,11 +5,10 @@ import { LoginStatus } from './interfaces/login-status.interface';
 
 @Controller('auth')
 export class AuthController {
-    
-    constructor(private readonly authService: AuthService){}
+  constructor(private readonly authService: AuthService) {}
 
-    @Post('login')  
-public async login(@Body() loginUserDto: LoginUserDto): Promise<LoginStatus> {
-    return await this.authService.login(loginUserDto);  
-}
+  @Post('login')
+  public async login(@Body() loginUserDto: LoginUserDto): Promise<LoginStatus> {
+    return await this.authService.login(loginUserDto);
+  }
 }

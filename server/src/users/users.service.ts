@@ -23,7 +23,7 @@ export class UsersService {
     return this.usersRepository.find();
   }
 
-  async findOne(email: string): Promise<Users  | undefined> {
+  async findOne(email: string): Promise<Users | undefined> {
     return this.usersRepository.findOne(email);
   }
 
@@ -36,25 +36,24 @@ export class UsersService {
     return this.usersRepository.softDelete(id);
   }
 
-  async findByLogin({email, password} : LoginUserDto): Promise<UserDto> {
+  async findByLogin({ email, password }: LoginUserDto): Promise<UserDto> {
     const user = await this.usersRepository.findOne(email);
 
-    if(!user) {
+    if (!user) {
       throw new HttpException('User not found', HttpStatus.UNAUTHORIZED);
     }
 
     // Comparing password
-    const isEqual = await comparePasswords(user.password, password); 
+    const isEqual = await comparePasswords(user.password, password);
 
-    if(!isEqual) {
+    if (!isEqual) {
       throw new HttpException('Invalid Credentials', HttpStatus.UNAUTHORIZED);
     }
-    
+
     return user;
   }
 
   async findByPayload({ email }: any): Promise<UserDto> {
-    return await this.findOne(email);  
+    return await this.findOne(email);
   }
-
 }
