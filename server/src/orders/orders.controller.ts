@@ -21,7 +21,7 @@ import { Orders } from './entities/order.entity';
 import { FIN_STATUS } from 'src/constants';
 import { DiscountsService } from 'src/discounts/discounts.service';
 import { OrderDetail } from 'src/order-details/entities/order-detail.entity';
-import { AuthGuard } from '@nestjs/passport';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
 @ApiTags('Orders')
 @Controller({
@@ -38,7 +38,7 @@ export class OrdersController {
   ) {}
 
   @Post(':userId')
-  @UseGuards(AuthGuard())
+  @UseGuards(JwtAuthGuard)
   async create(
     @Body() createOrderDto: CreateOrderReqDto,
     @Param('userId') userId: string,
@@ -97,31 +97,31 @@ export class OrdersController {
   }
 
   @Get()
-  @UseGuards(AuthGuard())
+  @UseGuards(JwtAuthGuard)
   findAll() {
     return this.ordersService.findAll();
   }
 
   @Get(':id')
-  @UseGuards(AuthGuard())
+  @UseGuards(JwtAuthGuard)
   findOne(@Param('id') id: string) {
     return this.ordersService.findOne(id);
   }
 
   @Get('user/:userId')
-  @UseGuards(AuthGuard())
+  @UseGuards(JwtAuthGuard)
   findUserOrders(@Param('userId') userId: string) {
     return this.ordersService.findByUserId(userId);
   }
 
   @Patch(':id')
-  @UseGuards(AuthGuard())
+  @UseGuards(JwtAuthGuard)
   update(@Param('id') id: string, @Body() updateOrderDto: UpdateOrderDto) {
     return this.ordersService.update(id, updateOrderDto);
   }
 
   @Delete(':id')
-  @UseGuards(AuthGuard())
+  @UseGuards(JwtAuthGuard)
   remove(@Param('id') id: string) {
     return this.ordersService.remove(id);
   }

@@ -68,7 +68,4 @@ export class Orders {
 
   @DeleteDateColumn()
   deletedAt: Date;
-
-  // for AuthGuard by Passport
-  @ManyToOne(type => Users)owner?: Users;
 }
