@@ -7,7 +7,9 @@ import {
   DeleteDateColumn,
   OneToMany,
   OneToOne,
+  BeforeInsert,
 } from 'typeorm';
+import * as bcrypt from 'bcrypt';
 import { Exclude } from 'class-transformer';
 import { IsDate, IsEmail, IsNotEmpty } from 'class-validator';
 import { PaymentInfo } from 'src/payment-info/entities/payment-info.entity';
@@ -74,4 +76,8 @@ export class Users {
 
   @DeleteDateColumn()
   deletedAt: Date;
+
+  @BeforeInsert() async hashPassword() {
+    this.password = await bcrypt.hash(this.password, 10);
+  }
 }

@@ -12,6 +12,7 @@ import { PaymentInfoModule } from './payment-info/payment-info.module';
 import { OrdersModule } from './orders/orders.module';
 import { OrderDetailsModule } from './order-details/order-details.module';
 import { DiscountsModule } from './discounts/discounts.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { DiscountsModule } from './discounts/discounts.module';
     OrdersModule,
     OrderDetailsModule,
     DiscountsModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
 import { OrdersService } from './orders.service';
 import { CreateOrderReqDto } from './dto/create-order.dto';
@@ -20,6 +21,7 @@ import { Orders } from './entities/order.entity';
 import { FIN_STATUS } from 'src/constants';
 import { DiscountsService } from 'src/discounts/discounts.service';
 import { OrderDetail } from 'src/order-details/entities/order-detail.entity';
+import { AuthGuard } from '@nestjs/passport';
 
 @ApiTags('Orders')
 @Controller({
@@ -36,6 +38,7 @@ export class OrdersController {
   ) {}
 
   @Post(':userId')
+  @UseGuards(AuthGuard())
   async create(
     @Body() createOrderDto: CreateOrderReqDto,
     @Param('userId') userId: string,
@@ -94,26 +97,31 @@ export class OrdersController {
   }
 
   @Get()
+  @UseGuards(AuthGuard())
   findAll() {
     return this.ordersService.findAll();
   }
 
   @Get(':id')
+  @UseGuards(AuthGuard())
   findOne(@Param('id') id: string) {
     return this.ordersService.findOne(id);
   }
 
   @Get('user/:userId')
+  @UseGuards(AuthGuard())
   findUserOrders(@Param('userId') userId: string) {
     return this.ordersService.findByUserId(userId);
   }
 
   @Patch(':id')
+  @UseGuards(AuthGuard())
   update(@Param('id') id: string, @Body() updateOrderDto: UpdateOrderDto) {
     return this.ordersService.update(id, updateOrderDto);
   }
 
   @Delete(':id')
+  @UseGuards(AuthGuard())
   remove(@Param('id') id: string) {
     return this.ordersService.remove(id);
   }
