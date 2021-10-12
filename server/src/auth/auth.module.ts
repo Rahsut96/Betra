@@ -15,9 +15,13 @@ import { JwtStrategy } from './jwt.strategy';
       session: false,
     }),
     JwtModule.register({
-      secret: process.env.SECRETKEY,
+      // not getting value of process.env.SECRETKEY
+      // secret: process.env.SECRETKEY,
+      // expiresIn: process.env.EXPIRESIN
+      //
+      secret: 'K14z7mBf1DxSEKZUHjvxhT5xSGK1JD0l',
       signOptions: {
-        expiresIn: process.env.EXPIRESIN,
+        expiresIn: process.env.EXPIRESIN || '1h',
       },
     }),
   ],

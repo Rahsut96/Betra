@@ -37,14 +37,13 @@ export class UsersService {
   }
 
   async findByLogin({ email, password }: LoginUserDto): Promise<UserDto> {
-    const user = await this.usersRepository.findOne(email);
-
+    const user = await this.usersRepository.findOne({ email });
     if (!user) {
       throw new HttpException('User not found', HttpStatus.UNAUTHORIZED);
     }
 
     // Comparing password
-    const isEqual = await comparePasswords(user.password, password);
+    const isEqual = await comparePasswords(password, user.password);
 
     if (!isEqual) {
       throw new HttpException('Invalid Credentials', HttpStatus.UNAUTHORIZED);

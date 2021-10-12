@@ -24,6 +24,7 @@ import { OrderDetail } from 'src/order-details/entities/order-detail.entity';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
 @ApiTags('Orders')
+@UseGuards(JwtAuthGuard)
 @Controller({
   version: '1',
   path: 'orders',
@@ -38,7 +39,6 @@ export class OrdersController {
   ) {}
 
   @Post(':userId')
-  @UseGuards(JwtAuthGuard)
   async create(
     @Body() createOrderDto: CreateOrderReqDto,
     @Param('userId') userId: string,
@@ -97,31 +97,31 @@ export class OrdersController {
   }
 
   @Get()
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   findAll() {
     return this.ordersService.findAll();
   }
 
   @Get(':id')
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   findOne(@Param('id') id: string) {
     return this.ordersService.findOne(id);
   }
 
   @Get('user/:userId')
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   findUserOrders(@Param('userId') userId: string) {
     return this.ordersService.findByUserId(userId);
   }
 
   @Patch(':id')
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   update(@Param('id') id: string, @Body() updateOrderDto: UpdateOrderDto) {
     return this.ordersService.update(id, updateOrderDto);
   }
 
   @Delete(':id')
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   remove(@Param('id') id: string) {
     return this.ordersService.remove(id);
   }
