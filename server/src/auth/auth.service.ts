@@ -9,7 +9,7 @@ import { JwtPayload } from './interfaces/payload.interface';
 @Injectable()
 export class AuthService {
   constructor(
-    private usersService: UsersService,
+    private readonly usersService: UsersService,
     private readonly jwtService: JwtService,
   ) {}
 
@@ -35,9 +35,9 @@ export class AuthService {
   }
 
   private _createToken({ email }: UserDto): any {
-    const expiresIn = process.env.EXPIRESIN || '1h';
 
     const user: JwtPayload = { email };
+    const expiresIn = process.env.EXPIRESIN || '1h';
     const accessToken = this.jwtService.sign(user);
     return {
       expiresIn,
