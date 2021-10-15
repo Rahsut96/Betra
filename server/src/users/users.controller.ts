@@ -10,6 +10,7 @@ import {
   ClassSerializerInterceptor,
   ValidationPipe,
 } from '@nestjs/common';
+import * as bcrypt from 'bcrypt';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -26,10 +27,9 @@ export class UsersController {
 
   @Post()
   async create(@Body(ValidationPipe) createUserDto: CreateUserDto) {
-    // hash password using bcrypt
-    // https://docs.nestjs.com/security/encryption-and-hashing#hashing
+    createUserDto.password = await bcrypt.hash(createUserDto.password, 10);
     const newUser = await this.usersService.create(createUserDto);
-    return { message: 'User created successfully !', data: newUser };
+    return { message: 'User created successfully !', data: { id: newUser.id } };
   }
 
   @Get()

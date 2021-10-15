@@ -8,8 +8,9 @@ import {
   OneToMany,
   OneToOne,
 } from 'typeorm';
+// import * as bcrypt from 'bcrypt';
 import { Exclude } from 'class-transformer';
-import { IsDate, IsEmail, IsNotEmpty } from 'class-validator';
+import { IsDate, IsEmail, IsMobilePhone, IsNotEmpty } from 'class-validator';
 import { PaymentInfo } from 'src/payment-info/entities/payment-info.entity';
 import { AccessCode } from 'src/access-code/entities/accessCode.entity';
 import { Orders } from 'src/orders/entities/order.entity';
@@ -36,8 +37,9 @@ export class Users {
   @Exclude()
   password: string;
 
-  @Column({ length: 10 })
+  @Column()
   @IsNotEmpty()
+  @IsMobilePhone()
   phone: string;
 
   @Column({ default: null })
@@ -74,4 +76,9 @@ export class Users {
 
   @DeleteDateColumn()
   deletedAt: Date;
+
+  // Below code is not working
+  // @BeforeInsert() async hashPassword() {
+  //   this.password = await bcrypt.hash(this.password, 10);
+  // }
 }

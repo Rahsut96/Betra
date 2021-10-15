@@ -1,14 +1,14 @@
-import React from "react";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { SvgXml } from "react-native-svg";
-import { StyleSheet } from "react-native";
-import HomeScreen from "../pages/HomeScreen";
-import ItemScanningScreen from "../pages/ItemScanningScreen";
-import OrderPaidScreen from "../pages/OrderPaidScreen";
-import ProfileTabNavigator from "./ProfileTabNavigator";
-import CustomButton from "../components/CustomButton";
-import closeIcon from "../../assets/close-icon.svg";
-import userIcon from "../../assets/user-icon.svg";
+import React from 'react';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { SvgXml } from 'react-native-svg';
+import { StyleSheet } from 'react-native';
+import HomeScreen from '../pages/HomeScreen';
+import ItemScanningScreen from '../pages/ItemScanningScreen';
+import OrderPaidScreen from '../pages/OrderPaidScreen';
+import ProfileTabNavigator from './ProfileTabNavigator';
+import CustomButton from '../components/CustomButton';
+import closeIcon from '../../assets/close-icon.svg';
+import userIcon from '../../assets/user-icon.svg';
 
 const Stack = createNativeStackNavigator();
 const styles = StyleSheet.create({
@@ -24,14 +24,14 @@ const ProfileIconBtn = ({ navigation }) => (
     <CustomButton
         style={styles.iconLink}
         title={<SvgXml xml={userIcon} width={40} height={40} />}
-        onPress={() => navigation.navigate("Account")}
+        onPress={() => navigation.navigate('Account')}
     />
 );
 const ProfileCloseBtn = ({ navigation }) => (
     <CustomButton
         style={styles.iconLink}
         title={<SvgXml xml={closeIcon} width={40} height={40} />}
-        onPress={() => navigation.navigate("Home")}
+        onPress={() => navigation.navigate('Home')}
     />
 );
 const AppNavigator = () => (

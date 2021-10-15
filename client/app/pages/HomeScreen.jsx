@@ -1,27 +1,27 @@
-import React, { useContext, useLayoutEffect } from "react";
-import { SafeAreaView, StyleSheet, View, Image } from "react-native";
-import { StatusBar } from "expo-status-bar";
-import CustomButton from "../components/CustomButton";
-import AuthContext from "../context/AuthContext";
-import image from "../../assets/Betra.png";
+import React, { useContext, useLayoutEffect } from 'react';
+import { SafeAreaView, StyleSheet, View, Image } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
+import CustomButton from '../components/CustomButton';
+import AuthContext from '../context/AuthContext';
+import image from '../../assets/Betra.png';
 
 const page = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#fff",
-        width: "100%",
-        paddingLeft: "10%",
-        paddingRight: "10%",
-        alignItems: "center",
-        justifyContent: "space-between",
+        backgroundColor: '#fff',
+        width: '100%',
+        paddingLeft: '10%',
+        paddingRight: '10%',
+        alignItems: 'center',
+        justifyContent: 'space-between',
     },
     qrCodeView: {
         height: 250,
         padding: 10,
-        justifyContent: "center",
+        justifyContent: 'center',
     },
     linkContainer: {
-        width: "100%",
+        width: '100%',
         borderWidth: 2,
         marginBottom: 20,
         padding: 15,
@@ -54,7 +54,7 @@ export default function HomeScreen({ navigation }) {
                 <CustomButton
                     style={page.linkButton}
                     title="Item Scanner"
-                    onPress={() => navigation.navigate("ItemScanningScreen")}
+                    onPress={() => navigation.navigate('ItemScanningScreen')}
                 />
                 <CustomButton style={page.linkButton} title="Menu" />
                 <CustomButton

@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Connection } from 'typeorm';
 import { AppController } from './app.controller';
@@ -12,6 +13,7 @@ import { PaymentInfoModule } from './payment-info/payment-info.module';
 import { OrdersModule } from './orders/orders.module';
 import { OrderDetailsModule } from './order-details/order-details.module';
 import { DiscountsModule } from './discounts/discounts.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -25,6 +27,8 @@ import { DiscountsModule } from './discounts/discounts.module';
     OrdersModule,
     OrderDetailsModule,
     DiscountsModule,
+    AuthModule,
+    ConfigModule.forRoot({isGlobal: true, envFilePath: ['.env.development.local', '.env']}),
   ],
   controllers: [AppController],
   providers: [AppService],

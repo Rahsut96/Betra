@@ -1,0 +1,11 @@
+{
+    "name": "betra",
+    "license": "UNLICENSED",
+    "scripts": {
+        "prepare": "husky install",
+        "install": "cd ./client && yarn && cd ../server && yarn"
+    },
+    "dependencies": {
+        "husky": "^7.0.2"
+    }
+}

@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
     SafeAreaView,
     StyleSheet,
@@ -6,16 +6,16 @@ import {
     View,
     Image,
     TouchableOpacity,
-} from "react-native";
-import PropType from "prop-types";
+} from 'react-native';
+import PropType from 'prop-types';
 
-import image from "../../assets/Betra.png";
+import image from '../../assets/Betra.png';
 
 const page = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#fff",
-        alignItems: "center",
+        backgroundColor: '#fff',
+        alignItems: 'center',
     },
     text: {
         paddingTop: 150,
@@ -35,7 +35,7 @@ function OrderPaidScreen({ navigation }) {
             </Text>
             <View style={page.qrCodeView}>
                 {/* TODO: QRCODE Scanner */}
-                <TouchableOpacity onPress={() => navigation?.navigate("Home")}>
+                <TouchableOpacity onPress={() => navigation?.navigate('Home')}>
                     <Image source={image} width="100%" />
                 </TouchableOpacity>
             </View>
