@@ -1,21 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import {
     TouchableOpacity,
     StyleSheet,
     Text,
     ViewPropTypes,
-} from "react-native";
-import PropTypes from "prop-types";
+} from 'react-native';
+import PropTypes from 'prop-types';
 
 const buttonStyle = StyleSheet.create({
     button: {
         height: 50,
         lineHeight: 50,
-        alignItems: "center",
+        alignItems: 'center',
         borderWidth: 2,
-        justifyContent: "center",
+        justifyContent: 'center',
         borderRadius: 5,
-        color: "#444",
+        color: '#444',
         paddingLeft: 24,
         paddingRight: 24,
         marginBottom: 20,
@@ -37,9 +37,9 @@ const buttonStyle = StyleSheet.create({
     },
 
     buttonText: {
-        color: "#333",
+        color: '#333',
         fontSize: 16,
-        fontWeight: "bold",
+        fontWeight: 'bold',
     },
     disabled: {
         opacity: 0.2,
@@ -86,14 +86,14 @@ CustomButton.propTypes = {
     style: ViewPropTypes.style,
     title: PropTypes.node,
     textStyle: Text.propTypes.style,
-    size: PropTypes.oneOf(["small", "medium", "large"]),
+    size: PropTypes.oneOf(['small', 'medium', 'large']),
     rounded: PropTypes.bool,
     disabled: PropTypes.bool,
 };
 CustomButton.defaultProps = {
-    title: "Save",
+    title: 'Save',
     textStyle: null,
-    size: "medium",
+    size: 'medium',
     rounded: false,
     disabled: false,
     style: undefined,

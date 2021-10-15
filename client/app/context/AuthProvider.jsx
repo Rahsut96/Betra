@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 // import AsyncStorage from "@react-native-async-storage/async-storage";
 
 // import { userSignInAPI, userSignUpAPI } from "../../api/auth";
-import AuthContext from "./AuthContext";
+import AuthContext from './AuthContext';
 // import { USER_TOKEN } from "./constants";
 
 // eslint-disable-next-line react/prop-types

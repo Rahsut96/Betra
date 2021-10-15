@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
     SafeAreaView,
     View,
@@ -6,26 +6,26 @@ import {
     StyleSheet,
     TextInput,
     Button,
-} from "react-native";
+} from 'react-native';
 // import { BarCodeScanner } from "expo-barcode-scanner";
 
 const page = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#fff",
-        alignItems: "center",
+        backgroundColor: '#fff',
+        alignItems: 'center',
     },
     heading: {
         fontSize: 28,
-        fontWeight: "bold",
+        fontWeight: 'bold',
         lineHeight: 200,
         padding: 20,
     },
     cardView: {
-        backgroundColor: "#fff",
-        width: "80%",
-        height: "25%",
-        borderColor: "#000",
+        backgroundColor: '#fff',
+        width: '80%',
+        height: '25%',
+        borderColor: '#000',
         borderWidth: 1,
         margin: 20,
     },
@@ -34,7 +34,7 @@ const page = StyleSheet.create({
         fontSize: 16,
     },
     cardInfoView: {
-        flexDirection: "row",
+        flexDirection: 'row',
     },
 });
 

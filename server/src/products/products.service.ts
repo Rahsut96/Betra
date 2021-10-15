@@ -20,8 +20,8 @@ export class ProductsService {
     return this.productRepository.find();
   }
 
-  findOne(id: string) {
-    return this.productRepository.findOne(id);
+  findOne(barcode: string) {
+    return this.productRepository.findOne({ barcode });
   }
 
   findMany(query: any) {

@@ -1,20 +1,20 @@
-import React, { useContext, useEffect, useState } from "react";
-import { ActivityIndicator, View, StyleSheet } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
+import React, { useContext, useEffect, useState } from 'react';
+import { ActivityIndicator, View, StyleSheet } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
 
-import AuthContext from "../context/AuthContext";
-import AppNavigator from "./AppNavigator";
-import AuthNavigator from "./AuthNavigator";
+import AuthContext from '../context/AuthContext';
+import AppNavigator from './AppNavigator';
+import AuthNavigator from './AuthNavigator';
 
-import Firebase from "../firebaseConfig";
+import Firebase from '../firebaseConfig';
 
 const auth = Firebase.auth();
 
 const page = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
+        justifyContent: 'center',
+        alignItems: 'center',
     },
 });
 

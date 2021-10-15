@@ -23,10 +23,13 @@ export class UsersService {
     return this.usersRepository.find();
   }
 
-  async findOne(email: string): Promise<Users | undefined> {
-    return this.usersRepository.findOne(email);
+  findOne(id: string): Promise<Users | undefined> {
+    return this.usersRepository.findOne(id);
   }
 
+  findByPayload({ email }: any): Promise<UserDto> {
+    return this.usersRepository.findOne({ email });
+  }
   update(id: string, updateUserDto: UpdateUserDto) {
     return this.usersRepository.update(id, updateUserDto);
     // return `This action updates a #${id} user`;
@@ -50,9 +53,5 @@ export class UsersService {
     }
 
     return user;
-  }
-
-  async findByPayload({ email }: any): Promise<UserDto> {
-    return await this.findOne(email);
   }
 }
