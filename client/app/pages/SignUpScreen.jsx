@@ -1,6 +1,6 @@
-import { Link } from "@react-navigation/native";
-import { StatusBar } from "expo-status-bar";
-import React, { useState } from "react";
+import { Link } from '@react-navigation/native';
+import { StatusBar } from 'expo-status-bar';
+import React, { useState } from 'react';
 import {
     StyleSheet,
     Text,
@@ -8,48 +8,48 @@ import {
     SafeAreaView,
     KeyboardAvoidingView,
     Platform,
-} from "react-native";
-import InputField from "../components/InputField";
-import CustomButton from "../components/CustomButton";
-import { IOS_PLATFORM } from "../constants";
+} from 'react-native';
+import InputField from '../components/InputField';
+import CustomButton from '../components/CustomButton';
+import { IOS_PLATFORM } from '../constants';
 
-import Firebase from "../firebaseConfig";
+import Firebase from '../firebaseConfig';
 
 const auth = Firebase.auth();
 
 const page = StyleSheet.create({
     container: {
         flex: 1,
-        width: "80%",
-        alignSelf: "center",
-        justifyContent: "center",
+        width: '80%',
+        alignSelf: 'center',
+        justifyContent: 'center',
         paddingHorizontal: 12,
     },
     heading: {
         fontSize: 28,
-        fontWeight: "bold",
+        fontWeight: 'bold',
         lineHeight: 150,
         padding: 20,
-        alignSelf: "center",
+        alignSelf: 'center',
     },
     title: {
         fontSize: 20,
-        fontWeight: "600",
-        color: "#000",
-        alignSelf: "center",
+        fontWeight: '600',
+        color: '#000',
+        alignSelf: 'center',
         paddingBottom: 24,
     },
     link: {
         marginTop: 24,
-        alignSelf: "center",
+        alignSelf: 'center',
     },
 });
 
 const SignupScreen = () => {
-    const [formValues, setFormValues] = useState({ email: "", password: "" });
+    const [formValues, setFormValues] = useState({ email: '', password: '' });
     // const [passwordVisibility, setPasswordVisibility] = useState(true);
     // const [rightIcon, setRightIcon] = useState('eye');
-    const [signupError, setSignupError] = useState("");
+    const [signupError, setSignupError] = useState('');
 
     // const handlePasswordVisibility = () => {
     //   if (rightIcon === 'eye') {
@@ -63,14 +63,14 @@ const SignupScreen = () => {
 
     const onHandleSignup = async () => {
         try {
-            if (formValues?.email !== "" && formValues?.password !== "") {
+            if (formValues?.email !== '' && formValues?.password !== '') {
                 await auth.createUserWithEmailAndPassword(
                     formValues.email,
                     formValues.password
                 );
             }
         } catch (error) {
-            Error({ message: "Enter correct values" });
+            Error({ message: 'Enter correct values' });
             setSignupError(error.message);
         }
     };
@@ -79,7 +79,7 @@ const SignupScreen = () => {
         <SafeAreaView style={page.container}>
             <StatusBar />
             <KeyboardAvoidingView
-                behavior={Platform.OS === IOS_PLATFORM ? "padding" : "height"}
+                behavior={Platform.OS === IOS_PLATFORM ? 'padding' : 'height'}
             >
                 <View>
                     <Text style={page.heading}>B E T R A</Text>

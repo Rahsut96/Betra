@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import {
     SafeAreaView,
     View,
@@ -6,22 +6,23 @@ import {
     StyleSheet,
     StatusBar,
     FlatList,
-} from "react-native";
-import { BarCodeScanner } from "expo-barcode-scanner";
-// import { v4 as uuidv4 } from "react-native-uuid";
-import CustomButton from "../components/CustomButton";
+    ActivityIndicator,
+} from 'react-native';
+import { BarCodeScanner } from 'expo-barcode-scanner';
+import CustomButton from '../components/CustomButton';
+import apiHelper from '../../config/apiHelper';
 
 const cameracorner = {
     width: 50,
     height: 50,
-    position: "absolute",
+    position: 'absolute',
 };
 const page = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#fff",
-        alignItems: "center",
-        justifyContent: "center",
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
         paddingTop: StatusBar.currentHeight + 20,
     },
     heading: {
@@ -30,34 +31,38 @@ const page = StyleSheet.create({
         marginBottom: 16,
     },
     barcodeScannerView: {
-        width: "80%",
-        height: "35%",
-        borderColor: "#000",
+        width: '80%',
+        height: '35%',
+        borderColor: '#000',
         borderRadius: 5,
         marginBottom: 20,
     },
     productsContainer: {
-        width: "100%",
-        paddingLeft: "10%",
-        paddingRight: "10%",
+        width: '100%',
+        paddingLeft: '10%',
+        paddingRight: '10%',
     },
     product: {
         flex: 1,
-        flexDirection: "row",
-        justifyContent: "space-between",
-        alignItems: "baseline",
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'baseline',
     },
     col_1: {
         width: 30,
-        textAlign: "right",
+        textAlign: 'right',
     },
     col_2: {
-        width: "70%",
+        width: '50%',
+    },
+    col_3: {
+        width: 70,
+        textAlign: 'right',
     },
 
     retry: {
-        height: "100%",
-        backgroundColor: "#ffffff88",
+        height: '100%',
+        backgroundColor: '#ffffff88',
         borderWidth: 0,
     },
     removeItem: {
@@ -90,10 +95,20 @@ const page = StyleSheet.create({
         right: 0,
         bottom: 0,
     },
+    loaderContainer: {
+        flex: 1,
+        justifyContent: 'center',
+    },
+    loaderHorizontal: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        padding: 10,
+    },
 });
 
 // eslint-disable-next-line react/prop-types
 const ItemScanningScreen = ({ navigation }) => {
+    const [loading, setLoading] = useState(false);
     const [hasPermission, setHasPermission] = useState(null);
     const [scanned, setScanned] = useState(false);
     const [products, setProducts] = useState([]);
@@ -101,35 +116,9 @@ const ItemScanningScreen = ({ navigation }) => {
     useEffect(() => {
         (async () => {
             const { status } = await BarCodeScanner.requestPermissionsAsync();
-            setHasPermission(status === "granted");
+            setHasPermission(status === 'granted');
         })();
     }, []);
-
-    const handleBarCodeScanned = ({ type, data }) => {
-        setScanned(true);
-        const sameItem = products?.find((item) => item.code === data);
-        if (sameItem?.code) {
-            //  Update quantity if product already exist
-            const restItem = products?.filter((item) => item.code !== data);
-            setProducts([
-                ...restItem,
-                { ...sameItem, quantity: sameItem.quantity + 1 },
-            ]);
-        } else {
-            setProducts([
-                ...products,
-                {
-                    type,
-                    code: data,
-                    price: "$23",
-                    quantity: 1,
-                    name: `item ${products.length + 1}`,
-                },
-            ]);
-        }
-
-        // alert(`Bar code with type ${type} and data ${data} has been scanned!`);
-    };
 
     if (hasPermission === null) {
         return <Text>Requesting for camera permission</Text>;
@@ -137,11 +126,86 @@ const ItemScanningScreen = ({ navigation }) => {
     if (hasPermission === false) {
         return <Text>No access to camera</Text>;
     }
+
     const handleRemove = (code) => {
         setProducts((prod) => prod.filter((item) => item.code !== code));
     };
-    const renderItem = ({ index, item }) => (
-        <View style={page.product} key={index}>
+    const handleGetProductInfo = async (barcode) => {
+        try {
+            setLoading(true);
+            const resdata = await apiHelper.get(`/products/${barcode}`)
+                .then((res) => JSON.parse(res));
+            
+            if (resdata) {
+                const prod = [
+                    ...products,
+                    {
+                        ...resdata,
+                        quantity: 1,
+                    },
+                ]
+                setProducts(prod);
+                // console.log('Product found',prod);
+            } else {
+                // console.log('Product Not found');
+            }
+        } catch (error) {
+            // console.log(error);
+        }
+        setTimeout(() => {
+            setLoading(false);
+        }, 100);
+    };
+    const handleOrder = async () => {
+        setLoading(true);
+        try {
+            const orderPayload = {
+                currency: 'inr',
+                tax: '35',
+                discountId: '',
+                orderItems: products?.map(({id,quantity, price})=> ({productId:id, discountId:null ,quantity, price}))
+            };
+            const resdata = await apiHelper.post(`${process.env.API_ENDPOINTS}/orders`,orderPayload).then((res) => JSON.parse(res));
+            if (resdata) {
+                navigation.navigate('OrderPaidScreen');
+                // console.log(resdata)
+            } else {
+                // console.log('Order Processing');
+            }
+        } catch (error) {
+            // console.log('Order failed');
+        }
+        
+        setTimeout(() => {
+            setLoading(false);
+        }, 100);
+    };
+
+    const handleBarCodeScanned = async ({ data }) => {
+        setScanned(true);
+        const savedItem = products?.find((item) => item.barcode === data);
+        if (savedItem?.barcode) {
+            //  Update quantity if product already exist
+            const restItem = products?.filter((item) => item.barcode !== data);
+            const quantity = savedItem.quantity + 1;
+            setProducts([
+                ...restItem,
+                {
+                    ...savedItem,
+                    quantity: savedItem.quantity + 1,
+                    price: (savedItem.price / savedItem.quantity) * quantity,
+                },
+            ]);
+        } else {
+            // console.log('barcode', data)
+            handleGetProductInfo(data);
+        }
+
+        // alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+    };
+
+    const ProductItem = ({ index, item }) => (
+        <View style={page.product} key={`${index}_${Math.random}`}>
             <View style={page.col_1}>
                 <Text>{item.quantity} × </Text>
             </View>
@@ -151,9 +215,14 @@ const ItemScanningScreen = ({ navigation }) => {
                 </Text>
             </View>
             <View style={page.col_3}>
-                <Text>{item.price}</Text>
+                <Text>
+                    {new Intl.NumberFormat('de-DE', {
+                        style: 'currency',
+                        currency: 'EUR',
+                    }).format(item.price)}
+                </Text>
             </View>
-            <View style={page.col_4}>
+            <View style={page.col_1}>
                 <CustomButton
                     title="✖"
                     size="small"
@@ -186,17 +255,20 @@ const ItemScanningScreen = ({ navigation }) => {
                 )}
             </View>
             <FlatList
-                style={page.productsContainer}
+                // style={page.productsContainer}
                 data={products}
-                renderItem={renderItem}
+                renderItem={ProductItem}
                 keyExtractor={(item) => item.name}
                 // extraData={selectedId}
             />
+            <View style={[page.loaderContainer, page.loaderHorizontal]}>
+                {loading && <ActivityIndicator color="#000000" />}
+            </View>
 
             <CustomButton
                 title="Checkout"
                 disabled={!products?.length}
-                onPress={() => navigation.navigate("OrderPaidScreen")}
+                onPress={() => handleOrder()}
             />
         </SafeAreaView>
     );

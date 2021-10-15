@@ -1,7 +1,7 @@
-import * as React from "react";
+import * as React from 'react';
 
 const AuthContext = React.createContext({
     authState: null,
 });
-AuthContext.displayName = "AuthContext";
+AuthContext.displayName = 'AuthContext';
 export default AuthContext;

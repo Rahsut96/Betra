@@ -21,7 +21,7 @@ import { JwtStrategy } from './jwt.strategy';
       //
       secret: 'K14z7mBf1DxSEKZUHjvxhT5xSGK1JD0l',
       signOptions: {
-        expiresIn: process.env.EXPIRESIN || '1h',
+        expiresIn: process.env.EXPIRESIN || '24h',
       },
     }),
   ],

@@ -21,7 +21,7 @@ export class Products {
   name: string;
 
   // Buffer.from(user.profileImage).toString('base64');
-  @Column('blob', { nullable: true })
+  @Column({ unique: true })
   @IsNotEmpty()
   barcode: string;
 

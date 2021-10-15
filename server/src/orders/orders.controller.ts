@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   UseGuards,
+  Req,
 } from '@nestjs/common';
 import { OrdersService } from './orders.service';
 import { CreateOrderReqDto } from './dto/create-order.dto';
@@ -22,6 +23,8 @@ import { FIN_STATUS } from 'src/constants';
 import { DiscountsService } from 'src/discounts/discounts.service';
 import { OrderDetail } from 'src/order-details/entities/order-detail.entity';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { Request } from 'express';
+import { Users } from 'src/users/entities/users.entity';
 
 @ApiTags('Orders')
 @UseGuards(JwtAuthGuard)
@@ -35,21 +38,22 @@ export class OrdersController {
     private readonly orderDetailService: OrderDetailsService,
     private readonly discountService: DiscountsService,
     private readonly inventoryService: InventoryService,
-    private readonly userService: UsersService,
+    private readonly userService: UsersService, // private readonly jwtService: JwtService,
   ) {}
 
-  @Post(':userId')
+  @Post()
   async create(
     @Body() createOrderDto: CreateOrderReqDto,
-    @Param('userId') userId: string,
+    @Req() request: Request,
   ) {
     // TODO: 1, read userid from Auth state
     // TODO: 2, Auth requiered
-    const user = await this.userService.findOne(userId);
-
+    const user = request.user as Users;
+    // const user = await this.userService.findOne(userId);
     if (user) {
       const { orderItems: orderReqItems, discountId } = createOrderDto;
-      const discount = this.discountService.findOne(discountId);
+      const discount = discountId && this.discountService.findOne(discountId);
+
       const query = orderReqItems?.map(({ productId, quantity }) => ({
         productId,
         stock: LessThan(quantity),
@@ -97,31 +101,27 @@ export class OrdersController {
   }
 
   @Get()
-  // @UseGuards(JwtAuthGuard)
   findAll() {
     return this.ordersService.findAll();
   }
 
   @Get(':id')
-  // @UseGuards(JwtAuthGuard)
   findOne(@Param('id') id: string) {
     return this.ordersService.findOne(id);
   }
 
-  @Get('user/:userId')
-  // @UseGuards(JwtAuthGuard)
-  findUserOrders(@Param('userId') userId: string) {
+  @Get('user')
+  findUserOrders(@Req() request: Request) {
+    const { id: userId } = request.user as Users;
     return this.ordersService.findByUserId(userId);
   }
 
   @Patch(':id')
-  // @UseGuards(JwtAuthGuard)
   update(@Param('id') id: string, @Body() updateOrderDto: UpdateOrderDto) {
     return this.ordersService.update(id, updateOrderDto);
   }
 
   @Delete(':id')
-  // @UseGuards(JwtAuthGuard)
   remove(@Param('id') id: string) {
     return this.ordersService.remove(id);
   }
