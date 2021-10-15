@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Connection } from 'typeorm';
 import { AppController } from './app.controller';
@@ -27,6 +28,7 @@ import { AuthModule } from './auth/auth.module';
     OrderDetailsModule,
     DiscountsModule,
     AuthModule,
+    ConfigModule.forRoot({isGlobal: true, envFilePath: ['.env.development.local', '.env']}),
   ],
   controllers: [AppController],
   providers: [AppService],

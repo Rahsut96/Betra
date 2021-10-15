@@ -16,17 +16,16 @@ import { JwtStrategy } from './jwt.strategy';
     }),
     JwtModule.register({
       // not getting value of process.env.SECRETKEY
-      // secret: process.env.SECRETKEY,
+      secret: `${process.env.JSECRETKEY}`,
       // expiresIn: process.env.EXPIRESIN
       //
-      secret: 'K14z7mBf1DxSEKZUHjvxhT5xSGK1JD0l',
+      // secret: 'K14z7mBf1DxSEKZUHjvxhT5xSGK1JD0l',
       signOptions: {
-        expiresIn: process.env.EXPIRESIN || '24h',
+        expiresIn: process.env.JEXPIRESIN || '24h',
       },
     }),
   ],
   controllers: [AuthController],
   providers: [AuthService, JwtStrategy],
-  exports: [PassportModule, JwtModule],
 })
 export class AuthModule {}

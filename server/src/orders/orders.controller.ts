@@ -27,7 +27,6 @@ import { Request } from 'express';
 import { Users } from 'src/users/entities/users.entity';
 
 @ApiTags('Orders')
-@UseGuards(JwtAuthGuard)
 @Controller({
   version: '1',
   path: 'orders',
@@ -41,6 +40,7 @@ export class OrdersController {
     private readonly userService: UsersService, // private readonly jwtService: JwtService,
   ) {}
 
+  @UseGuards(JwtAuthGuard)
   @Post()
   async create(
     @Body() createOrderDto: CreateOrderReqDto,
