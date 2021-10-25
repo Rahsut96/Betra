@@ -14,6 +14,7 @@ import { OrdersModule } from './orders/orders.module';
 import { OrderDetailsModule } from './order-details/order-details.module';
 import { DiscountsModule } from './discounts/discounts.module';
 import { AuthModule } from './auth/auth.module';
+import { GatewayModule } from './gateway/gateway.module';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { AuthModule } from './auth/auth.module';
     DiscountsModule,
     AuthModule,
     ConfigModule.forRoot({isGlobal: true, envFilePath: ['.env.development.local', '.env']}),
+    GatewayModule,
   ],
   controllers: [AppController],
   providers: [AppService],
